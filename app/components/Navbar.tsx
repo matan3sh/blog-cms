@@ -1,3 +1,4 @@
+import ThemeSwitch from "@/app/components/ThemeSwitch"
 import Link from "next/link"
 
 const Navbar = () => {
@@ -7,7 +8,7 @@ const Navbar = () => {
         <Link href="/">
           <div>Dev Blog</div>
         </Link>
-        <div>theme</div>
+        <ThemeSwitch />
       </div>
     </div>
   )

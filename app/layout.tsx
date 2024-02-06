@@ -1,4 +1,5 @@
 import Navbar from "@/app/components/Navbar"
+import Provider from "@/app/utils/Provider"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main className="mx-auto max-w-5xl px-6">{children}</main>
+        <Provider>
+          <Navbar />
+          <main className="mx-auto max-w-5xl px-6">{children}</main>
+        </Provider>
       </body>
     </html>
   )
