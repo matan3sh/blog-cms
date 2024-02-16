@@ -1,4 +1,5 @@
 import Header from "@/app/components/Header"
+import PostItem from "@/app/components/PostItem"
 import { Post } from "@/app/utils/Interface"
 import { client } from "@/sanity/lib/client"
 
@@ -23,7 +24,7 @@ export default async function Home() {
       <Header title="Articles" />
       <div>
         {posts?.length > 0 &&
-          posts?.map((post) => <p key={post._id}>{post.title}</p>)}
+          posts?.map((post) => <PostItem key={post?._id} post={post} />)}
       </div>
     </div>
   )
