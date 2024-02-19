@@ -1,4 +1,5 @@
 import Header from "@/app/components/Header"
+import { Post } from "@/app/utils/Interface"
 import { client } from "@/sanity/lib/client"
 
 async function getPost(slug: string) {
@@ -26,13 +27,11 @@ interface PostDetailsProps {
 }
 
 const PostDetails = async ({ params }: PostDetailsProps) => {
-  const post = await getPost(params?.slug)
-
-  console.log(post)
+  const post: Post = await getPost(params?.slug)
 
   return (
     <div>
-      <Header title="Dynamic Page" />
+      <Header title={post?.title} />
     </div>
   )
 }
