@@ -1,7 +1,10 @@
 import Header from "@/app/components/Header"
 import { Post } from "@/app/utils/Interface"
 import { client } from "@/sanity/lib/client"
+import { urlForImage } from "@/sanity/lib/image"
+import { PortableText } from "@portabletext/react"
 import { VT323 } from "next/font/google"
+import Image from "next/image"
 import Link from "next/link"
 
 const dateFont = VT323({ weight: "400", subsets: ["latin"] })
@@ -13,6 +16,8 @@ async function getPost(slug: string) {
       slug,
       publishedAt,
       excerpt,
+      _id,
+      body,
       tags[]-> {
         _id,
         slug,
@@ -49,9 +54,37 @@ const PostDetails = async ({ params }: PostDetailsProps) => {
             </Link>
           ))}
         </div>
+        <div className={richTextStyles}>
+          <PortableText
+            value={post?.body}
+            components={myPortableTextComponents}
+          />
+        </div>
       </div>
     </div>
   )
 }
 
 export default PostDetails
+
+const myPortableTextComponents = {
+  types: {
+    image: ({ value }: any) => (
+      <Image src={urlForImage(value)} alt="Post" width={700} height={700} />
+    ),
+  },
+}
+
+const richTextStyles = `
+mt-14
+text-justify
+max-w-2xl
+m-auto
+prose-headings:my-5
+prose-heading:text-2xl
+prose-p:mb-5
+prose-p:leading-7
+prose-li:list-disc
+prose-li:leading-7
+prose-li:ml-4
+`
